@@ -1,105 +1,127 @@
-let index= prompt ("¡Hola, Bienvenido a PawMatch! \n ¿Qué te gustaría realizar? Ingresá la primer palabra en mayúsculas de la opción que corresponda \n ADOPTAR una mascota \n COMPRAR en la tienda \n SALIR");
+const Mascotas = [
+    { nombre: "tito", edad: "cachorro", genero: "macho", tipo: "perro"},
+    { nombre: "juana", edad: "adulto", genero: "hembra", tipo: "perro"},
+    { nombre: "roco", edad: "adulto mayor", genero: "macho", tipo: "perro"},
+    { nombre: "pelusa", edad: "cachorro", genero: "hembra", tipo: "gato"},
+    { nombre: "luna", edad: "adulto", genero: "hembra", tipo: "gato"},
+    { nombre: "atom", edad: "cachorro", genero: "macho", tipo: "gato"},
+];
+console.log(Mascotas);
 
-switch (index) {
+function animales (id, nombre, edad, genero, tipo){
+    this.id = id;
+   this.nombre = nombre;
+   this.edad = edad;
+   this.genero = genero;
+   this.tipo = tipo;
+}
 
-    case "ADOPTAR": 
 
-        let adopcionMascotas= prompt("Ellos estan esperando un hogar: \n ROCO - perro cachorro mediano \n PEPA - perra adulta pequeña \n PAPITA - gata bebe \n HECTOR - gato adulto\n Ingresa su nombre en mayúsculas para adoptarlo o escribe SALIR para finalizar");
+let index= prompt ("¡Hola, Bienvenido a PawMatch! \n ¿Qué le gustaría realizar? Ingresá la opción que corresponda \n 1 - Adoptar una mascota \n 2 - Buscar una mascota \n 3 - Publicar una mascota \n 0 - Salir");
 
-            if (adopcionMascotas = "ROCO" && "PEPA" && "PAPITA" && "HECTOR") {
+ switch(index){
 
-                alert("Gracias por dale un nuevo hogar a " + adopcionMascotas + " Nos vamos a comunicar con vos para completar el formulario y terminar la adopción");
+        case "1": 
+
+            let adoptado=alert(prompt("Ellos son los que estan esperando un hogar: \n Tito: Perro cachorro \n Juana: Perra adulta \n Roco: Perro adulto mayor \n Pelusa: Gata cachorra \n Luna: Gata adulta \n Atom: Gato cachorro \n\n Ingresa el nombre correspondiente a la mascota que deseas adoptar \n 0 - Salir"));
+
+            //No se porque me devuelve la respuesta en un alert y porque si pongo adoptado en el alert en vez de decirme lo que escribio el usuario me da indefinido
+
+            if (adoptado != "0"){
+
+                alert("Gracias por adoptar! Nos estaremos comunicando para finalizar la adopción, por favor a continuación completa los datos")
+
                 let adoptante=prompt("Por favor indicanos tu nombre");
-                let mail= prompt("Por favor ingresa tu emal");
-                alert("En minutos te llegará el formulario al mail " + mail);
-                console.log( "El adoptante es " + adoptante + " y su email es " + mail); 
 
-            }else if (adopcionMascotas === "SALIR") {
+                let mailadoptante= prompt("Por favor ingresa tu emal");
+
+                alert("Perfecto " + adoptante + " en minutos te llegará el formulario al mail " + mailadoptante);
+
+                console.log( "El adoptante es " + adoptante + " y su email es " + mailadoptante);
+            
+            break;
+
+            } else {
                 alert("Hasta la próxima, te esperamos!");
-
-            }else{
-                alert("Opción no válida, por favor vuelva a intentarlo");
             }
-
-        break;
         
-        case "COMPRAR":
+        break;
 
-            let costoProducto = 0
+        case "2": 
 
-            consultarProductos()
+            let busqueda= prompt("Indique por que categoría desea filtrar la búsqueda ingresá la opción que corresponda \n 1 - Por nombre \n 2 - Por edad \n 3 - Por género \n 4 - Por tipo \n 0 - Salir")
 
-            function mostrarProductos (infoProductos){
+            if (busqueda == "1"){
 
-                switch (infoProductos){
+                let filtro = prompt("Indique el nombre de la mascota en minúsculas");
 
-                    case "COMEDERO":
-                        costoProducto= 2500
-                        alert (" El comedero es de metal con una base de madera y cuesta " + costoProducto);
-                    break;
+                let resultados = Mascotas.filter(animal => animal.nombre.includes(filtro));
 
-                    case "BEBEDERO":
-                        costoProducto= 2500
-                        alert (" El bebedero es de metal con una base de madera y cuesta " + costoProducto);
-                    break;
+                //No me salió poner los resultados en un alert, me figuraban como objetos
 
-                    case "CAMITA":
-                        costoProducto= 6600
-                        alert (" La camita tiene una cubierta externa de madera, interna de corderito con un almohadon de tela polar y cuesta " + costoProducto);
-                    break;
+                console.log(resultados);
 
-                    case "COMIDA":
-                        costoProducto= 12000
-                        alert (" Bolsa de 20kg de Royal y cuesta " + costoProducto);
-                    break;
+            } else if (busqueda == "2") {
 
-                    case "CHAPITA":
-                        costoProducto= 1100
-                        alert (" La chapita es de metal estilo hebilla de cinturon que se pasa por el collar  y cuesta " + costoProducto);
-                    break;
+                let filtro = prompt("Indique la edad de la mascota que desea adoptar \n (cachorro - adulto o adulto mayor)");
 
-                    case "SALIR":
-                        alert("Hasta la próxima, te esperamos!");
-                    break;
+                let resultados = Mascotas.filter(animal => animal.edad.includes(filtro));
 
-                    default:
-                        alert("Opción no válida, por favor vuelva a intentarlo");
-                }
-            }
+                console.log(resultados);
 
-            function consultarProductos() {
+            } else if (busqueda == "3") {
 
-                let listadoProductos = prompt ("Estos son los productos de nuestra tienda solidaria: \n COMEDERO  \n BEBEDERO \n CAMITA \n COMIDA \n CHAPITA \n Ingresa el nombre el producto en mayúsculas para detalles o escribe SALIR para finalizar" );
+                let filtro = prompt("Indique el género de la mascota que desea adoptar \n (hembra o macho)");
 
-                if (listadoProductos) {
-                    mostrarProductos(listadoProductos)
-                    mostrarPagos()
-                    let respuesta = confirm("¿Deseas consultar el precio de otro producto?")
-                    if (respuesta === true) {
-                        consultarProductos()
-                    }
-                } else {
-                    alert("Debes ingresar un producto válido.")
-                }
+                let resultados = Mascotas.filter(animal => animal.genero.includes(filtro));
+
+                console.log(resultados);
+                    
+            } else if (busqueda == "4") {
+
+                 let filtro = prompt("Indique el tipo de mascota que desea adoptar \n (perro o gato)");
+
+                let resultados = Mascotas.filter(animal => animal.tipo.includes(filtro));
+
+                console.log(resultados);
+                    
+            } else {
+                alert("Hasta la próxima, te esperamos!");
             }
             
-            function mostrarPagos() {
-                console.log("Puedes pagar en: ")
-                for (let i = 1; i <= 6; i++) {
-                    console.log( i, "cuota(s) de " + (costoProducto / i).toFixed(2))
-                }
+        break;
 
-            }
+        case "3":
 
-        break;    
+            let nombreNuevaMascota= prompt("Ingrese el nombre de la mascota \n En caso de no tener o no saberlo indíquele uno");
+            let edadNuevaMascota= prompt("Ingrese si la mascota es cachorro, adulto o adulto mayor \n Escriba la opcion que corresponde en minúscula");
+            let generoNuevaMascota= prompt("Ingrese si la mascota es hembra o macho \n Escriba la opcion que corresponde en minúscula");
+            let tipoNuevaMascota= prompt("Ingrese si la mascota es gato o perro \n Escriba la opcion que corresponde en minúscula");
 
-        case "SALIR":
+            const publicado= [nombreNuevaMascota,edadNuevaMascota, generoNuevaMascota, tipoNuevaMascota];
+            Mascotas.push(publicado);
+
+            alert("Perfecto, la mascota " + nombreNuevaMascota + " " + edadNuevaMascota + " " + generoNuevaMascota + " " + tipoNuevaMascota + " fue publicada con éxito, ante cualquier novedad nos estaremos comunicando, por favor a continuación completa los datos");
+            let contacto=prompt("Por favor indicanos tu nombre");
+            let mailcontacto= prompt("Por favor ingresa tu emal");
+            console.log( "El contacto es " + contacto + " y su email es " + mailcontacto);
+        
+        break;
+
+        case "0":
             alert("Hasta la próxima, te esperamos!");
         break;
 
         default:
             alert("Opción no válida, por favor vuelva a intentarlo");
         break;
-    
     }
+
+
+
+
+
+
+
+
 
